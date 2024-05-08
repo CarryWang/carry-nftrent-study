@@ -9,6 +9,8 @@ import {
   StarIcon,
   CameraIcon,
   BookOpenIcon,
+  PaperAirplaneIcon,
+  SparklesIcon,
 } from "@heroicons/react/24/outline";
 
 import ConnectButton from "@/components/ConnectButton";
@@ -20,7 +22,7 @@ export default function Navbar() {
 
   return (
     <header>
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-base-100 text-white">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -74,7 +76,7 @@ export default function Navbar() {
             )}
             <li>
               <a>
-                <StarIcon className="h-6 w-6" />
+                <SparklesIcon className="h-6 w-6" />
                 Stake
               </a>
             </li>
@@ -86,7 +88,7 @@ export default function Navbar() {
             </li>
             <li>
               <a>
-                <CameraIcon className="h-6 w-6" />
+                <PaperAirplaneIcon className="h-6 w-6" />
                 Airdrop
               </a>
             </li>
