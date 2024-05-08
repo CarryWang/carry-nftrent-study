@@ -89,7 +89,7 @@ export default function Navbar() {
             <li>
               <a>
                 <PaperAirplaneIcon className="h-6 w-6" />
-                Airdrop
+                空投
               </a>
             </li>
           </ul>
