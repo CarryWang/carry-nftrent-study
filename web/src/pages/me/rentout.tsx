@@ -17,7 +17,11 @@ import { parseUnits } from "viem";
 
 export default function Rentout() {
   const nftResp = useUserNFTs();
+
+  console.log(nftResp, "从thegraph查询的5个nft数据++++++++++++++++++++");
+
   const { address: userWallet, chainId } = useAccount();
+  const { connector } = getAccount(wagmiConfig);
 
   const [selectedNft, setSelectedNft] = useState<NFTInfo | null>(null);
   const [step, setStep] = useState(1);
@@ -85,7 +89,13 @@ export default function Rentout() {
       console.log("info:", chainId, PROTOCOL_CONFIG[chainId!].domain);
 
       // TODO 请求钱包签名，获得签名信息
-      const signature = "0x0000...0000";
+      const signature = await signTypedData(wagmiConfig, {
+        connector,
+        domain: PROTOCOL_CONFIG[chainId!].domain,
+        types: eip721Types,
+        primaryType: "RentoutOrder",
+        message: order,
+      });
 
       console.log("signature", signature);
 
@@ -201,7 +211,7 @@ export default function Rentout() {
                     <span className="label-text">Daily Rent</span>
                     <span className="label-text-alt"></span>
                   </div>
-                  <label className="input input-bordered flex items-center gap-2">
+                  <label className="input input-bordered flex items-center gap-2 text-white">
                     <input
                       type="number"
                       ref={dailyRentRef}
@@ -224,7 +234,7 @@ export default function Rentout() {
                     <span className="label-text">Min Collateral</span>
                     <span className="label-text-alt"></span>
                   </div>
-                  <label className="input input-bordered flex items-center gap-2">
+                  <label className="input input-bordered flex items-center gap-2 text-white">
                     <input
                       type="number"
                       ref={collateralRef}

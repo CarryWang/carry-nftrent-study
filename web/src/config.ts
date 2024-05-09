@@ -50,14 +50,20 @@ export const wagmiConfig = createConfig({
 });
 
 import { type TypedData } from "viem";
+import { version } from "os";
 
 // 协议配置
+// "RenftMarket", "1"
 export const PROTOCOL_CONFIG = {
   [Number(sepolia.id)]: {
     domain: {
       // TODO: 配置EIP-712签名域名信息
+      name: "RenftMarket",
+      version: "1",
+      chainId: 11155111,
+      verifyingContract: "0x36678F13127e764f771f4bB579d8D055B00145Df",
     },
-    rentoutMarket: "0x000...000", // TODO: 配置出租市场合约地址
+    rentoutMarket: "0x36678F13127e764f771f4bB579d8D055B00145Df", // TODO: 配置出租市场合约地址
   },
 } as const;
 
@@ -66,5 +72,12 @@ export const eip721Types = {
   // 出租NFT的挂单信息结构
   RentoutOrder: [
     // TODO: 定义出租订单结构数据
+    { name: "maker", type: "address" },
+    { name: "nft_ca", type: "address" },
+    { name: "token_id", type: "uint256" },
+    { name: "daily_rent", type: "uint256" },
+    { name: "max_rental_duration", type: "uint256" },
+    { name: "min_collateral", type: "uint256" },
+    { name: "list_endtime", type: "uint256" },
   ],
 } as const as TypedData;
